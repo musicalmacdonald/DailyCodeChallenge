@@ -5,11 +5,11 @@ const productFib = (prod) => {
     if (nMinus * n === prod) {
       return [nMinus, n, true];
     }
-    const temp = nMinus;
+    const nextFib = nMinus + n;
     nMinus = n;
-    n = temp + n;
+    n = nextFib;
   } while (nMinus * n <= prod);
-
+  // instead of explicitly returning true/false should have put test (nMinus*n === prod)
   return [nMinus, n, false];
 };
 
@@ -25,10 +25,10 @@ console.log(productFib(602070), [610, 987, true]);
 // create the fibonacci sequence after already looping through prod and then divisors,
 // I realized I was on the wrong track
 const productFibWrong = (prod) => {
-    const divisors = getDivisors(prod);
-    const isFibArr = divisors.map((value) => {
-      return { value, isFibNum: isFib(value)};
-    })
+  const divisors = getDivisors(prod);
+  const isFibArr = divisors.map((value) => {
+    return { value, isFibNum: isFib(value) };
+  });
 };
 
 const getDivisors = (num) => {
@@ -48,5 +48,3 @@ const isPerfectSquare = (num) => {
   const sqroot = Math.sqrt(num);
   return sqroot * sqroot === num;
 };
-
-
