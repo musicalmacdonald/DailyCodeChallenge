@@ -1,10 +1,5 @@
 package com.megan;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 public class LeetMay4 {
   /* Given an array nums with n integers, your task is to check if it could become non-decreasing by modifying at most one element.
   We define an array is non-decreasing if nums[i] <= nums[i + 1] holds for every i (0-based) such that (0 <= i <= n - 2)*/
@@ -25,20 +20,16 @@ public class LeetMay4 {
         descCount++;
         modifyIndex = i-1;
         trends[i] = false;
-//        System.out.println(nums[i-1] + " " + nums[i] + " " + nums[modifyIndex]);
       } else {
         ascCount++;
       }
     }
-    System.out.println(ascCount + " " + descCount);
 //    If all values are not descending, removing any value will result w/ ascending
     if (ascCount >= numsCopy.length - 1) {
       return true;
     }
     if(descCount == 1) {
-      System.out.println("in first if");
       if (modifyIndex > 0 && modifyIndex < nums.length - 2) {
-        System.out.println("middle");
         numsCopy[modifyIndex] = (nums[modifyIndex-1] + nums[modifyIndex+1])/2;
         boolean modifyIndexFixes = isOrdered(numsCopy);
         numsCopy[modifyIndex] = nums[modifyIndex];
@@ -47,11 +38,9 @@ public class LeetMay4 {
 
         return modifyIndexFixes || modifyNextIndexFixes;
       } else if (modifyIndex == 0) {
-        System.out.println("0");
         numsCopy[modifyIndex] = numsCopy[modifyIndex+1]-1;
         return isOrdered(numsCopy);
       } else if (modifyIndex == nums.length - 2) {
-        System.out.println("2 before end");
         return true;
       }
     }
