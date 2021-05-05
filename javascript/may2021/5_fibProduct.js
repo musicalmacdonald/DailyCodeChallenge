@@ -1,3 +1,5 @@
+// Challenge link: https://www.codewars.com/kata/5541f58a944b85ce6d00006a/train/javascript
+
 const productFib = (prod) => {
   let nMinus = 1;
   let n = 1;
