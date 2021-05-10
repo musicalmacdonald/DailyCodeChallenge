@@ -1,6 +1,7 @@
 package com.megan.Leet;
 
 public class May5JumpGame {
+//  Challenge link: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge-2021/598/week-1-may-1st-may-7th/3732/
   /* Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
 
   Each element in the array represents your maximum jump length at that position.
