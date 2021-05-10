@@ -44,8 +44,10 @@ public class Main {
       int[] test4 = {2, 1};
       System.out.println("4) " + May5JumpGame.jump(test4) + " -> 1");
       int[] test5 = {1, 2};
-      System.out.println("4) " + May5JumpGame.jump(test5) + " -> 1");
+      System.out.println("5) " + May5JumpGame.jump(test5) + " -> 1");
       int[] test6 = {1, 2, 3};
-      System.out.println("4) " + May5JumpGame.jump(test6) + " -> 2");
+      System.out.println("6) " + May5JumpGame.jump(test6) + " -> 2");
+      int[] test7 = {1, 2, 1, 1, 1};
+      System.out.println("7) " + May5JumpGame.jump(test7) + " -> 3");
     }
 }
