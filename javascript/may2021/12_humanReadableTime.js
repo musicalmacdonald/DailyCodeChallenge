@@ -5,7 +5,7 @@
 const humanReadable = (seconds) => {
   const hours = padZero(Math.floor(seconds / 3600));
   const minutes = padZero(Math.floor((seconds % 3600) / 60));
-  const sec = padZero((seconds % 3600) % 60);
+  const sec = padZero(seconds % 60);
 
   return `${hours}:${minutes}:${sec}`;
 };
