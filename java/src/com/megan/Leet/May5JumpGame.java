@@ -45,4 +45,21 @@ public class May5JumpGame {
     return jumps;
   }
 
+  public static void runProblem() {
+      int[] test1 = {2, 3, 1, 1, 4};
+      System.out.println("1) " + jump(test1) + " -> 2");
+      int[] test2 = {1, 2, 3, 4};
+      System.out.println("2) " + jump(test2) + " -> 2");
+      int[] test3 = {0};
+      System.out.println("3) " + jump(test3) + " -> 0");
+      int[] test4 = {2, 1};
+      System.out.println("4) " + jump(test4) + " -> 1");
+      int[] test5 = {1, 2};
+      System.out.println("5) " + jump(test5) + " -> 1");
+      int[] test6 = {1, 2, 3};
+      System.out.println("6) " + jump(test6) + " -> 2");
+      int[] test7 = {1, 2, 1, 1, 1};
+      System.out.println("7) " + jump(test7) + " -> 3");
+  }
+
 }
