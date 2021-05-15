@@ -108,7 +108,7 @@ class Sudoku {
   }
 }
 
-var goodSudoku1 = new Sudoku([
+const goodSudoku1 = new Sudoku([
   [7, 8, 4, 1, 5, 9, 3, 2, 6],
   [5, 3, 9, 6, 7, 2, 8, 4, 1],
   [6, 1, 2, 4, 3, 8, 7, 5, 9],
@@ -122,7 +122,7 @@ var goodSudoku1 = new Sudoku([
   [1, 9, 5, 2, 8, 7, 6, 3, 4],
 ]);
 
-var goodSudoku2 = new Sudoku([
+const goodSudoku2 = new Sudoku([
   [1, 4, 2, 3],
   [3, 2, 4, 1],
 
@@ -130,7 +130,7 @@ var goodSudoku2 = new Sudoku([
   [2, 3, 1, 4],
 ]);
 
-var badSudoku1 = new Sudoku([
+const badSudoku1 = new Sudoku([
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -144,10 +144,10 @@ var badSudoku1 = new Sudoku([
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
 ]);
 
-var badSudoku2 = new Sudoku([[1, 2, 3, 4, 5], [1, 2, 3, 4], [1, 2, 3, 4], [1]]);
+const badSudoku2 = new Sudoku([[1, 2, 3, 4, 5], [1, 2, 3, 4], [1, 2, 3, 4], [1]]);
 
 
-var trickySudoku = new Sudoku([
+const trickySudoku = new Sudoku([
   [1, 3, 3, 3],
   [3, 3, 3, 1],
   [3, 1, 3, 3],
