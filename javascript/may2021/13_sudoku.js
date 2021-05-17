@@ -1,3 +1,4 @@
+// Challenge link: https://www.codewars.com/kata/540afbe2dc9f615d5e000425/javascript
 
 /**
  * Sudoku class.
@@ -49,14 +50,16 @@ class Sudoku {
     for (let row = 0; row < n; row++) {
       let colArr = [];
       for (let col = 0; col < n; col++) {
-        if (typeof array[col][row] === 'number') {
+        if (typeof array[col][row] === "number") {
           colArr.push(array[col][row]);
         } else {
           columnsValid = false;
           break;
         }
       }
-      columnsValid = colArr.sort((a, b) => a - b).every((curr, i) => curr === range[i]);
+      columnsValid = colArr
+        .sort((a, b) => a - b)
+        .every((curr, i) => curr === range[i]);
       if (!columnsValid) {
         break;
       }
@@ -144,8 +147,12 @@ const badSudoku1 = new Sudoku([
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
 ]);
 
-const badSudoku2 = new Sudoku([[1, 2, 3, 4, 5], [1, 2, 3, 4], [1, 2, 3, 4], [1]]);
-
+const badSudoku2 = new Sudoku([
+  [1, 2, 3, 4, 5],
+  [1, 2, 3, 4],
+  [1, 2, 3, 4],
+  [1],
+]);
 
 const trickySudoku = new Sudoku([
   [1, 3, 3, 3],
@@ -256,7 +263,6 @@ const goodSudoku3 = new Sudoku([
     22, 13, 25, 18,
   ],
 ]);
-
 
 console.log("1 ", goodSudoku1.isValid(), true);
 console.log("2 ", goodSudoku2.isValid(), true);
