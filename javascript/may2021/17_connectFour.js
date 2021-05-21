@@ -11,93 +11,90 @@ function whoIsWinner(piecesPositionList) {
     const column = columns[piecesPositionList[play].slice(0, 1)];
     const color = piecesPositionList[play].slice(2);
     board[column].push(color);
-    const rowWin = isRowSolved(column);
-    const colWin = isColSolved(column, color);
-    const diagWin = isDiagSolved(column);
+    const rowWin = isRowSolved(column, color, board);
+    const colWin = isColSolved(column, color, board);
+    const diagWin = isDiagSolved(column, color, board);
     if (rowWin || colWin || diagWin) {
       winner = color;
       break;
     }
   }
   return winner !== "" ? winner : draw;
+}
 
-
-  function isColSolved(column, color) {
-    let solved = false;
-    const row = board[column].length - 1;
-    // if there aren't 4 entries skip
-    if (row > 2) {
-      let colCount = 0;
-      // check column (y == board[x].length - 1)
-      for (let j = row; j >= 0; j--) {
-        colCount = board[column][j] === color ? colCount + 1 : 0;
-        // console.log({colCount, color})
-        if (colCount === 4) {
-          solved = true;
-          break;
-        }
-      }
-    }
-    return solved;
-  }
-
-  function isRowSolved(column) {
-    let solved = false;
-    const row = board[column].length - 1;
-    const color = board[column][row];
-    let rowCount = 0;
-    for (let col = 0; col < board.length; col++) {
-      rowCount = board[col][row] === color ? rowCount + 1 : 0;
-      if (rowCount === 4) {
+function isColSolved(column, color, board) {
+  let solved = false;
+  const row = board[column].length - 1;
+  // if there aren't 4 entries skip
+  if (row > 2) {
+    let colCount = 0;
+    // check column (y == board[x].length - 1)
+    for (let j = row; j >= 0; j--) {
+      colCount = board[column][j] === color ? colCount + 1 : 0;
+      // console.log({colCount, color})
+      if (colCount === 4) {
         solved = true;
         break;
       }
     }
-    return solved;
   }
+  return solved;
+}
 
-  function isDiagSolved(column) {
-    let solved = false;
-    const row = board[column].length - 1;
-    const color = board[column][row];
+function isRowSolved(column, color, board) {
+  let solved = false;
+  const row = board[column].length - 1;
+  let rowCount = 0;
+  for (let col = 0; col < board.length; col++) {
+    rowCount = board[col][row] === color ? rowCount + 1 : 0;
+    if (rowCount === 4) {
+      solved = true;
+      break;
+    }
+  }
+  return solved;
+}
 
-    // goal is to find bottom point in diag line w/ current location,
-    // then see if there's 4 of the color in the diag
+function isDiagSolved(column, color, board) {
+  let solved = false;
+  const row = board[column].length - 1;
 
-    let rightCount = 0;
-    let leftCount = 0;
+  // goal is to find bottom point in diag line w/ current location,
+  // then see if there's 4 of the color in the diag
 
-    const startRightCol = column - row;
-    const startLeftCol = column + row;
-    // can loop for different amounts per Column
-    const loopLength = [6, 6, 5, 4, 5, 6, 6]
+  let rightCount = 0;
+  let leftCount = 0;
 
-    // Col A - D
-    if (startRightCol > -1 && startRightCol < 4 ) {
-      // Diag up to the right
-      for (let d = 0; d < loopLength[startRightCol]; d++) {
-        const rightDiagColor = board[column - row + d][d];
-        rightCount = rightDiagColor === color ? rightCount + 1 : 0;
-        if (rightCount === 4) {
-          solved = true;
-          break;
-        }
+  const startRightCol = column - row;
+  const startLeftCol = column + row;
+  // can loop for different amounts per Column
+  const loopLength = [6, 6, 5, 4, 5, 6, 6]
+
+  // Col A - D
+  if (startRightCol > -1 && startRightCol < 4 ) {
+    // Diag up to the right
+    for (let d = 0; d < loopLength[startRightCol]; d++) {
+      const rightDiagColor = board[column - row + d][d];
+      rightCount = rightDiagColor === color ? rightCount + 1 : 0;
+      if (rightCount === 4) {
+        solved = true;
+        break;
       }
     }
-    // Col D-G
-    if (startLeftCol > 2 && startLeftCol < 7 && !solved) {
-      // Diag up to the left
-      for (let d = 0; d < loopLength[startLeftCol]; d++) {
-        const leftDiagColor = board[column + row - d][d];
-        leftCount = leftDiagColor === color ? leftCount + 1 : 0;
-        if (leftCount === 4) {
-          solved = true;
-          break;
-        }
+  }
+  // Col D-G
+  if (startLeftCol > 2 && startLeftCol < 7 && !solved) {
+    // Diag up to the left
+    for (let d = 0; d < loopLength[startLeftCol]; d++) {
+      const leftDiagColor = board[column + row - d][d];
+      leftCount = leftDiagColor === color ? leftCount + 1 : 0;
+      if (leftCount === 4) {
+        solved = true;
+        break;
       }
     }
-    return solved;
   }
+  return solved;
 }
 
 // Yellow diag
