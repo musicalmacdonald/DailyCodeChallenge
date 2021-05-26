@@ -13,14 +13,13 @@ const whoEatsWho = (zoo) => {
     if ( i > 0 && doesEat(current, previous)) {
       zooArr.splice(i - 1, 1);
       zooTimelapse.push(eats(current, previous));
-      i = 0;
+      i = i > 1 ? i - 2 : 0;
       continue;
     }
     
     if (i < zooArr.length - 1 && doesEat(current, next)) {
       zooArr.splice(i + 1, 1);
       zooTimelapse.push(eats(current, next));
-      i = 0;
       continue;
     }
     i++;
