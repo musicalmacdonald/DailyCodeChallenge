@@ -2,7 +2,7 @@
 
 const fizzBuzzCuckooClock = (time) => {
   const [hourStr, minuteStr] = time.split(":");
-  let clockReturn = "";
+  let clockReturn = "tick";
   const hours = parseInt(hourStr, 10);
   const minutes = parseInt(minuteStr, 10);
 
@@ -12,8 +12,6 @@ const fizzBuzzCuckooClock = (time) => {
     clockReturn = "Fizz";
   } else if (minutes % 5 === 0) {
     clockReturn = "Buzz";
-  } else {
-    clockReturn = "tick";
   }
 
   if (minutes === 0) {
