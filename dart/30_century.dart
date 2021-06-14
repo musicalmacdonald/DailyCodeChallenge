@@ -9,6 +9,8 @@ int century(year) {
 }
 //  can be simplified down to:
 // int century(year) => (year / 100).ceil();
+// Also!
+// (year / 100).toInt() == year ~/ 100
 
 // Also did Java and JS for this challenge:
 // 
