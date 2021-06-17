@@ -41,4 +41,21 @@ public class ShortChallengesJune {
     return count;
   }
 
+  // # 33
+  // Challenge link: https://www.codewars.com/kata/598d91785d4ce3ec4f000018
+  public static int [] nameValue(String [] arr){
+    int[] values = new int[arr.length];
+
+    for (int i=0; i < arr.length; i++) {
+      int count = 0;
+
+      for(char letter: arr[i].toCharArray()) {
+        count += letter == ' ' ? 0 : (int) letter - 96;
+      }
+
+      values[i] = count * (i + 1);
+    }
+    return values;
+  }
+
 }
