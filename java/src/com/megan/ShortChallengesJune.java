@@ -58,4 +58,23 @@ public class ShortChallengesJune {
     return values;
   }
 
+  // #35
+  // Challenge link: https://www.codewars.com/kata/559a28007caad2ac4e000083
+  public static BigInteger perimeter(BigInteger n) {
+    return fibSum(n).multiply(BigInteger.valueOf(4));
+  }
+
+  static BigInteger fibSum(BigInteger n) {
+    BigInteger fib0 = BigInteger.ZERO;
+    BigInteger fib1 = BigInteger.ONE;
+    BigInteger sum = BigInteger.ZERO;
+    for (int i = 0; i <= n.intValue(); i++) {
+      sum = sum.add(fib1);
+      fib1 = fib1.add(fib0);
+      fib0 = fib1.subtract(fib0);
+    }
+    return sum;
+  }
+
+
 }
