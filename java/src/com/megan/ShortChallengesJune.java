@@ -1,5 +1,6 @@
 package com.megan;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 
 public class ShortChallengesJune {
@@ -75,6 +76,67 @@ public class ShortChallengesJune {
     }
     return sum;
   }
+
+  // #40
+  // Challenge link: https://www.codewars.com/kata/5c09ccc9b48e912946000157
+  public static int peakHeight(char[][] mountain) {
+    int count = 1;
+    char checkChar = ' ';
+
+    while (hasVal(mountain, '^')) {
+      for (int i = 0; i < mountain.length; i++) {
+        for (int j = 0; j < mountain[i].length; j++) {
+          if (
+              mountain[i][j] == '^' &&
+                  checkTBRL(mountain, i, j, checkChar)
+          ) {
+            mountain[i][j] = (char) count;
+          }
+        }
+      }
+      checkChar = (char) count;
+      count++;
+    }
+
+    // remove last count increase
+    return count - 1;
+  }
+
+  private static boolean hasVal(char[][]arr, char checkVal) {
+    boolean isPresent = false;
+    for (char[] subArray : arr) {
+      for(char current: subArray) {
+        if(current == checkVal) {
+          isPresent = true;
+          break;
+        }
+      }
+    }
+    return isPresent;
+  };
+
+  private static boolean checkTBRL(char[][] arr, int i, int j, char checkChar) {
+    // if you hit an edge return true (the else case below)
+    boolean top = i > 0 ? arr[i - 1][j] == checkChar : true;
+    boolean bottom = i < arr.length - 1 ? arr[i + 1][j] == checkChar : true;
+    boolean right = j < arr[i].length - 1 ? arr[i][j + 1] == checkChar : true;
+    boolean left = j > 0 ? arr[i][j - 1] == checkChar : true;
+
+    return top || bottom || right || left;
+  };
+
+
+
+
+  public class Dinglemouse {
+
+
+
+  }
+
+
+
+
 
 
 }
