@@ -20,11 +20,10 @@ public class No41_BirdRiverJune2021 {
       
       days = dryCount(elevation);
     } else {
-      int totalArea = terrain.length * terrain[0].length;
+      int totalArea = terrain.length > 0 ? terrain.length * terrain[0].length : terrain.length;
       days = new int[] {totalArea, totalArea, totalArea, totalArea};
     }
     
-    System.out.printf("dry: %d %d %d %d", days[0], days[1], days[2], days[3]);
     return days;
   }
   
@@ -39,22 +38,27 @@ public class No41_BirdRiverJune2021 {
     dryLand[0] = totalArea - valCount(terrain, '-');
     
     int day = 1;
-    char checkChar = ' ';
+    char[] checkChar = new char[4];
+    checkChar[0] = ' ';
 
      while (day < 4) {
-       int[] startPosition = getStartPos(terrain, checkChar);
-       
+       int[] startPosition = getStartPos(terrain, checkChar[day - 1]);
+       if (startPosition == null) startPosition = new int[]{0, 0};
 //        keep flooding until no river '-' are directly next to any checkChar
        while(startPosition != null) {
          flood(startPosition[0], startPosition[1], terrain, checkChar);
-         startPosition = getStartPos(terrain, checkChar);
+         startPosition = getStartPos(terrain, checkChar[day - 1]);
        }
 //       count leftover land
        int flooded = valCount(terrain, '-');
        dryLand[day] = totalArea - flooded;
-//       update checkChar to next elevation
-       checkChar = Character.forDigit(day++,10);
+       
+       System.out.printf("day %d: \n", day);
        printTerrain(terrain);
+       
+//       update checkChar to next elevation
+       checkChar[day] = Character.forDigit(day++,10);
+       
     }
 
     return dryLand;
@@ -67,17 +71,18 @@ public class No41_BirdRiverJune2021 {
  * @param checkVal - target character to replace with river character
  * @return VOID recursively replaces characters in arr with river character '-'
  */
-  private static void flood(int x, int y, char[][] arr, char checkVal) {
+  private static void flood(int x, int y, char[][] arr, char[] checkVals) {
     int width = arr.length;
     int depth = arr[0].length;
     for (int i = x - 1; i <= x + 1; i++) {
       if (i < 0 || i > (width - 1)) continue;
       for (int j = y - 1; j <= y + 1; j++) {
-        if (j < 0 || j > (depth - 1)) {
+        boolean diagonals = (i == x-1 && j == y-1) || (i == x+1 && j == y+1) || (i == x+1 && j == y-1) || (i == x-1 && j == y+1);
+        if (j < 0 || j > (depth - 1) || diagonals) {
           continue;
-        } else if (arr[i][j] == checkVal || arr[i][j] == ' ') {
+        } else if (hasVal(checkVals, arr[i][j])) {
           arr[i][j] = '-';
-          flood(i, j, arr, checkVal);
+          flood(i, j, arr, checkVals);
         } 
       }
     }
@@ -94,8 +99,9 @@ public class No41_BirdRiverJune2021 {
   private static int[] getStartPos (char[][] arr, char checkChar) {
     for(int i = 0; i < arr.length; i++) {
       for(int j = 0; j < arr[0].length; j++) {
-        if(arr[i][j] == '-' && checkTBRL(arr, i, j, checkChar, false)) 
+        if(arr[i][j] == '-' && checkTBRL(arr, i, j, checkChar, false)) {
           return new int[]{i, j};
+        }  
       }
     }
     return null;
@@ -153,6 +159,21 @@ public class No41_BirdRiverJune2021 {
     return isPresent;
   };
   
+/**
+ * hasVal 
+ * @param arr - array of characters
+ * @param checkVal - target value
+ * @return boolean indication if checkVal is present in arr
+ */
+  private static boolean hasVal(char[] arr, char checkVal) {
+    for (char current : arr) {
+        if (current == checkVal) {
+            return true;
+        }
+    }
+    return false;
+  }
+  
 
 /**
  * valCount 
@@ -181,16 +202,12 @@ public class No41_BirdRiverJune2021 {
  * @return boolean indicating if the checkChar is present 
  */
   private static boolean checkTBRL(char[][] arr, int i, int j, char checkChar, boolean defaultForEdge) {
-    try {
-      boolean top = arr[i - 1][j] == checkChar;
-      boolean bottom = arr[i + 1][j] == checkChar;
-      boolean right = arr[i][j + 1] == checkChar;
-      boolean left = arr[i][j - 1] == checkChar;
+    boolean top = i > 0 ? arr[i - 1][j] == checkChar : defaultForEdge;
+    boolean bottom = i < arr.length - 1 ? arr[i + 1][j] == checkChar : defaultForEdge;
+    boolean right = j < arr[i].length - 1 ? arr[i][j + 1] == checkChar : defaultForEdge;
+    boolean left = j > 0 ? arr[i][j - 1] == checkChar : defaultForEdge;
 
-      return top || bottom || right || left;
-    } catch (ArrayIndexOutOfBoundsException e) {
-      return defaultForEdge;
-    }
+    return top || bottom || right || left;
   };
   
 /**
