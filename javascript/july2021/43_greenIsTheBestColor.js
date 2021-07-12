@@ -17,9 +17,15 @@ function yellowBeGone(colorNameOrCode) {
       updatedColor = '#' + newRed + newGreen + newBlue;
     }
   } else {
-    const getRidofThatYellow = { gold: 'ForestGreen', khaki: 'LimeGreen', lemonchiffon: 'PaleGreen',
-      lightgoldenrodyellow: 'SpringGreen', lightyellow: 'MintCream', palegoldenrod: 'LightGreen',
-      yellow: 'Lime' };
+    const getRidofThatYellow = { 
+      gold: 'ForestGreen',
+      khaki: 'LimeGreen',
+      lemonchiffon: 'PaleGreen',
+      lightgoldenrodyellow: 'SpringGreen',
+      lightyellow: 'MintCream',
+      palegoldenrod: 'LightGreen',
+      yellow: 'Lime',
+    };
     updatedColor = getRidofThatYellow[colorNameOrCode.toLowerCase()] || colorNameOrCode;
   }
  
